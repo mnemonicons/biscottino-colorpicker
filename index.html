@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biscottino Color Scheme</title>
+    <style>
+        /* Biscottino Color Variables */
+        :root {
+            /* Base Colors */
+            --biscottino-vanilla: #FFF9F0;
+            --biscottino-base-50: #F7F3ED;
+            --biscottino-base-100: #EDE8E1;
+            --biscottino-base-150: #E0D9D0;
+            --biscottino-base-200: #D3C9BD;
+            --biscottino-base-300: #BCB0A0;
+            --biscottino-base-500: #978875;
+            --biscottino-base-600: #7B6E5E;
+            --biscottino-base-700: #5F5447;
+            --biscottino-base-800: #433A30;
+            --biscottino-base-850: #352E26;
+            --biscottino-base-900: #27221C;
+            --biscottino-base-950: #1A1612;
+            --biscottino-crumb: #0D0B08;
+        }
+
+        /* Light Theme */
+        [data-theme="light"] {
+            --bg: var(--biscottino-vanilla);
+            --bg-2: var(--biscottino-base-50);
+            --ui: var(--biscottino-base-100);
+            --ui-2: var(--biscottino-base-150);
+            --ui-3: var(--biscottino-base-200);
+            --tx-3: var(--biscottino-base-300);
+            --tx-2: var(--biscottino-base-600);
+            --tx: var(--biscottino-crumb);
+        }
+
+        /* Dark Theme */
+        [data-theme="dark"] {
+            --bg: var(--biscottino-crumb);
+            --bg-2: var(--biscottino-base-950);
+            --ui: var(--biscottino-base-900);
+            --ui-2: var(--biscottino-base-850);
+            --ui-3: var(--biscottino-base-800);
+            --tx-3: var(--biscottino-base-700);
+            --tx-2: var(--biscottino-base-500);
+            --tx: var(--biscottino-base-200);
+        }
+
+        /* Page Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            padding: 2rem;
+            background: var(--bg);
+            color: var(--tx);
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: var(--tx-2);
+            font-size: 1.2rem;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--ui-3);
+            border: 2px solid var(--ui-3);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--tx);
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--ui-2);
+            border-color: var(--ui-2);
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section h2 {
+            margin-bottom: 1.5rem;
+            color: var(--tx);
+            border-bottom: 2px solid var(--ui);
+            padding-bottom: 0.5rem;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .color-swatch {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--ui);
+            transition: transform 0.2s ease;
+        }
+
+        .color-swatch:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .color-box {
+            width: 100%;
+            height: 80px;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+        }
+
+        .color-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .color-hex {
+            font-size: 0.875rem;
+            color: var(--tx-2);
+            font-family: monospace;
+        }
+
+        .accent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .accent-card {
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: var(--bg-2);
+            border: 1px solid var(--ui);
+        }
+
+        .accent-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .accent-colors {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .accent-color {
+            flex: 1;
+            height: 60px;
+            border-radius: 4px;
+        }
+
+        code {
+            background: var(--bg-2);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Courier New', monospace;
+        }
+
+        .code-block {
+            background: var(--bg-2);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid var(--ui);
+        }
+
+        .code-block pre {
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <button class="theme-toggle" onclick="toggleTheme()">🌓 Toggle Theme</button>
+
+    <div class="container">
+        <header>
+            <h1>🍪 Biscottino</h1>
+            <p class="subtitle">A warm, cookie and sepia inspired color scheme</p>
+        </header>
+
+        <section class="section">
+            <h2>Base Colors</h2>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #FFF9F0;"></div>
+                    <div class="color-name">Vanilla</div>
+                    <div class="color-hex">#FFF9F0</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #F7F3ED;"></div>
+                    <div class="color-name">Base 50</div>
+                    <div class="color-hex">#F7F3ED</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #D3C9BD;"></div>
+                    <div class="color-name">Base 200</div>
+                    <div class="color-hex">#D3C9BD</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #978875;"></div>
+                    <div class="color-name">Base 500</div>
+                    <div class="color-hex">#978875</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #5F5447;"></div>
+                    <div class="color-name">Base 700</div>
+                    <div class="color-hex">#5F5447</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #27221C;"></div>
+                    <div class="color-name">Base 900</div>
+                    <div class="color-hex">#27221C</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #0D0B08; border: 1px solid #ccc;"></div>
+                    <div class="color-name">Crumb</div>
+                    <div class="color-hex">#0D0B08</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Accent Colors</h2>
+            <div class="accent-grid">
+                <div class="accent-card">
+                    <h3>🍓 Berry</h3>
+                    <div class="accent-colors">
+                        <div class="accent-color" style="background: #C84858;"></div>
+                        <div class="accent-color" style="background: #9E2B3A;"></div>
+                    </div>
+                </div>
+                <div class="accent-card">
+                    <h3>🍯 Caramel</h3>
+                    <div class="accent-colors">
+                        <div class="accent-color" style="background: #D4783B;"></div>
+                        <div class="accent-color" style="background: #B5621C;"></div>
+                    </div>
+                </div>
+                <div class="accent-card">
+                    <h3>🍯 Honey</h3>
+                    <div class="accent-colors">
+                        <div class="accent-color" style="background: #C99A2D;"></div>
+                        <div class="accent-color" style="background: #A67C15;"></div>
+                    </div>
+                </div>
+                <div class="accent-card">
+                    <h3>🌿 Pistachio</h3>
+                    <div class="accent-colors">
+                        <div class="accent-color" style="background: #869448;"></div>
+                        <div class="accent-color" style="background: #6B7A1A;"></div>
+                    </div>
+                </div>
+                <div class="accent-card">
+                    <h3>🌿 Mint</h3>
+                    <div class="accent-colors">
+                        <div class="accent-color" style="background: #49A396;"></div>
+                        <div class="accent-color" style="background: #2D7A70;"></div>
+                    </div>
+                </div>
+                <div class="accent-card">
+                    <h3>🫐 Blueberry</h3>
+                    <div class="accent-colors">
+                        <div class="accent-color" style="background: #5078B4;"></div>
+                        <div class="accent-color" style="background: #2B5A96;"></div>
+                    </div>
+                </div>
+                <div class="accent-card">
+                    <h3>🟣 Plum</h3>
+                    <div class="accent-colors">
+                        <div class="accent-color" style="background: #8965BE;"></div>
+                        <div class="accent-color" style="background: #664195;"></div>
+                    </div>
+                </div>
+                <div class="accent-card">
+                    <h3>🍒 Cherry</h3>
+                    <div class="accent-colors">
+                        <div class="accent-color" style="background: #BF5A93;"></div>
+                        <div class="accent-color" style="background: #96336C;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Code Example</h2>
+            <div class="code-block">
+                <pre><code><span style="color: #6B7A1A;">function</span> <span style="color: #D4783B;">greetUser</span>(<span style="color: #5078B4;">name</span>) {
+    <span style="color: #5F5447;">// Welcome the user</span>
+    <span style="color: #6B7A1A;">const</span> <span style="color: #5078B4;">greeting</span> = <span style="color: #2D7A70;">"Hello, "</span> + <span style="color: #5078B4;">name</span> + <span style="color: #2D7A70;">"!"</span>;
+    <span style="color: #D4783B;">console.log</span>(<span style="color: #5078B4;">greeting</span>);
+    <span style="color: #6B7A1A;">return</span> <span style="color: #664195;">true</span>;
+}</code></pre>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+        }
+    </script>
+</body>
+</html>
