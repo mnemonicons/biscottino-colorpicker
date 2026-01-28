@@ -139,6 +139,16 @@
             height: 80px;
             border-radius: 6px;
             margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .color-box:hover {
+            transform: scale(1.05);
+        }
+
+        .color-box:active {
+            transform: scale(0.95);
         }
 
         .color-name {
@@ -154,7 +164,7 @@
 
         .accent-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
             margin-top: 1.5rem;
         }
@@ -169,17 +179,6 @@
         .accent-card h3 {
             margin-bottom: 1rem;
             font-size: 1.25rem;
-        }
-
-        .accent-colors {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .accent-color {
-            flex: 1;
-            height: 60px;
-            border-radius: 4px;
         }
 
         code {
@@ -201,6 +200,43 @@
             font-family: 'Monaco', 'Courier New', monospace;
             font-size: 0.9rem;
         }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 5rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: var(--tx);
+            color: var(--bg);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-weight: 600;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Click Cursor für Farbboxen */
+        [data-hex] {
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        [data-hex]:hover {
+            transform: scale(1.05);
+        }
+
+        [data-hex]:active {
+            transform: scale(0.95);
+        }
     </style>
 </head>
 <body data-theme="light">
@@ -208,7 +244,7 @@
 
     <div class="container">
         <header>
-            <h1>🍪 Biscottino</h1>
+            <h1>🍪 Biscottino<span style="display: inline-block; font-size: 0.8rem; font-weight: 500; background: var(--ui-3); color: var(--tx-2); padding: 0.15rem 0.5rem; border-radius: 4px; vertical-align: super; margin-left: 0.3rem;">v2.0</span></h1>
             <p class="subtitle">A warm, cookie and sepia inspired color scheme</p>
         </header>
 
@@ -216,37 +252,77 @@
             <h2>Base Colors</h2>
             <div class="color-grid">
                 <div class="color-swatch">
-                    <div class="color-box" style="background: #FFF9F0;"></div>
+                    <div class="color-box" data-hex="#FFF9F0" style="background: #FFF9F0;"></div>
                     <div class="color-name">Vanilla</div>
                     <div class="color-hex">#FFF9F0</div>
                 </div>
                 <div class="color-swatch">
-                    <div class="color-box" style="background: #F7F3ED;"></div>
+                    <div class="color-box" data-hex="#F7F3ED" style="background: #F7F3ED;"></div>
                     <div class="color-name">Base 50</div>
                     <div class="color-hex">#F7F3ED</div>
                 </div>
                 <div class="color-swatch">
-                    <div class="color-box" style="background: #D3C9BD;"></div>
+                    <div class="color-box" data-hex="#EDE8E1" style="background: #EDE8E1;"></div>
+                    <div class="color-name">Base 100</div>
+                    <div class="color-hex">#EDE8E1</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" data-hex="#E0D9D0" style="background: #E0D9D0;"></div>
+                    <div class="color-name">Base 150</div>
+                    <div class="color-hex">#E0D9D0</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" data-hex="#D3C9BD" style="background: #D3C9BD;"></div>
                     <div class="color-name">Base 200</div>
                     <div class="color-hex">#D3C9BD</div>
                 </div>
                 <div class="color-swatch">
-                    <div class="color-box" style="background: #978875;"></div>
+                    <div class="color-box" data-hex="#BCB0A0" style="background: #BCB0A0;"></div>
+                    <div class="color-name">Base 300</div>
+                    <div class="color-hex">#BCB0A0</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" data-hex="#A59788" style="background: #A59788;"></div>
+                    <div class="color-name">Base 400</div>
+                    <div class="color-hex">#A59788</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" data-hex="#978875" style="background: #978875;"></div>
                     <div class="color-name">Base 500</div>
                     <div class="color-hex">#978875</div>
                 </div>
                 <div class="color-swatch">
-                    <div class="color-box" style="background: #5F5447;"></div>
+                    <div class="color-box" data-hex="#7B6E5E" style="background: #7B6E5E;"></div>
+                    <div class="color-name">Base 600</div>
+                    <div class="color-hex">#7B6E5E</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" data-hex="#5F5447" style="background: #5F5447;"></div>
                     <div class="color-name">Base 700</div>
                     <div class="color-hex">#5F5447</div>
                 </div>
                 <div class="color-swatch">
-                    <div class="color-box" style="background: #27221C;"></div>
+                    <div class="color-box" data-hex="#433A30" style="background: #433A30;"></div>
+                    <div class="color-name">Base 800</div>
+                    <div class="color-hex">#433A30</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" data-hex="#352E26" style="background: #352E26;"></div>
+                    <div class="color-name">Base 850</div>
+                    <div class="color-hex">#352E26</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" data-hex="#27221C" style="background: #27221C;"></div>
                     <div class="color-name">Base 900</div>
                     <div class="color-hex">#27221C</div>
                 </div>
                 <div class="color-swatch">
-                    <div class="color-box" style="background: #0D0B08; border: 1px solid #ccc;"></div>
+                    <div class="color-box" data-hex="#1A1612" style="background: #1A1612;"></div>
+                    <div class="color-name">Base 950</div>
+                    <div class="color-hex">#1A1612</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" data-hex="#0D0B08" style="background: #0D0B08; border: 1px solid #888;"></div>
                     <div class="color-name">Crumb</div>
                     <div class="color-hex">#0D0B08</div>
                 </div>
@@ -258,58 +334,562 @@
             <div class="accent-grid">
                 <div class="accent-card">
                     <h3>🍓 Berry</h3>
-                    <div class="accent-colors">
-                        <div class="accent-color" style="background: #C84858;"></div>
-                        <div class="accent-color" style="background: #9E2B3A;"></div>
+                    <div class="color-grid" style="grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 0.5rem; margin-top: 0.5rem;">
+                        <div style="text-align: center;">
+                            <div data-hex="#FFE3E7" style="background: #FFE3E7; height: 40px; border-radius: 4px; border: 1px solid var(--ui);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">50</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#FFE3E7</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#FFCAD2" style="background: #FFCAD2; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">100</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#FFCAD2</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#FFB1BE" style="background: #FFB1BE; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">150</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#FFB1BE</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#FB98AA" style="background: #FB98AA; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">200</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#FB98AA</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#E47087" style="background: #E47087; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">300</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#E47087</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#C84858" style="background: #C84858; height: 40px; border-radius: 4px; border: 2px solid var(--tx);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem; font-weight: 700;">400</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#C84858</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#B33848" style="background: #B33848; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">500</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#B33848</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#9E2B3A" style="background: #9E2B3A; height: 40px; border-radius: 4px; border: 2px solid var(--tx);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem; font-weight: 700;">600</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#9E2B3A</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#84242F" style="background: #84242F; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">700</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#84242F</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#611C23" style="background: #611C23; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">800</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#611C23</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#4D181C" style="background: #4D181C; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">850</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#4D181C</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#391316" style="background: #391316; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">900</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#391316</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#250F11" style="background: #250F11; height: 40px; border-radius: 4px; border: 1px solid #888;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">950</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#250F11</div>
+                        </div>
                     </div>
                 </div>
                 <div class="accent-card">
                     <h3>🍯 Caramel</h3>
-                    <div class="accent-colors">
-                        <div class="accent-color" style="background: #D4783B;"></div>
-                        <div class="accent-color" style="background: #B5621C;"></div>
+                    <div class="color-grid" style="grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 0.5rem; margin-top: 0.5rem;">
+                        <div style="text-align: center;">
+                            <div data-hex="#FFEBD4" style="background: #FFEBD4; height: 40px; border-radius: 4px; border: 1px solid var(--ui);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">50</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#FFEBD4</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#FFD8B6" style="background: #FFD8B6; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">100</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#FFD8B6</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#FFC599" style="background: #FFC599; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">150</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#FFC599</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#FDB27E" style="background: #FDB27E; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">200</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#FDB27E</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#EE9052" style="background: #EE9052; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">300</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#EE9052</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#D4783B" style="background: #D4783B; height: 40px; border-radius: 4px; border: 2px solid var(--tx);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem; font-weight: 700;">400</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#D4783B</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#C26B2E" style="background: #C26B2E; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">500</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#C26B2E</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#B5621C" style="background: #B5621C; height: 40px; border-radius: 4px; border: 2px solid var(--tx);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem; font-weight: 700;">600</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#B5621C</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#985318" style="background: #985318; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">700</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#985318</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#6F3D14" style="background: #6F3D14; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">800</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#6F3D14</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#593112" style="background: #593112; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">850</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#593112</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#432610" style="background: #432610; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">900</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#432610</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#2C1C0E" style="background: #2C1C0E; height: 40px; border-radius: 4px; border: 1px solid #888;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">950</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#2C1C0E</div>
+                        </div>
                     </div>
                 </div>
                 <div class="accent-card">
                     <h3>🍯 Honey</h3>
-                    <div class="accent-colors">
-                        <div class="accent-color" style="background: #C99A2D;"></div>
-                        <div class="accent-color" style="background: #A67C15;"></div>
+                    <div class="color-grid" style="grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 0.5rem; margin-top: 0.5rem;">
+                        <div style="text-align: center;">
+                            <div data-hex="#FFF4D0" style="background: #FFF4D0; height: 40px; border-radius: 4px; border: 1px solid var(--ui);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">50</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#FFF4D0</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#FEEAAE" style="background: #FEEAAE; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">100</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#FEEAAE</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#FBDF8E" style="background: #FBDF8E; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">150</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#FBDF8E</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#F7D471" style="background: #F7D471; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">200</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#F7D471</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#E8BD45" style="background: #E8BD45; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">300</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#E8BD45</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#C99A2D" style="background: #C99A2D; height: 40px; border-radius: 4px; border: 2px solid var(--tx);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem; font-weight: 700;">400</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#C99A2D</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#B68B20" style="background: #B68B20; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">500</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#B68B20</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#A67C15" style="background: #A67C15; height: 40px; border-radius: 4px; border: 2px solid var(--tx);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem; font-weight: 700;">600</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#A67C15</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#8B6812" style="background: #8B6812; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">700</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#8B6812</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#654C0E" style="background: #654C0E; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">800</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#654C0E</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#513D0D" style="background: #513D0D; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">850</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#513D0D</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#3C2E0C" style="background: #3C2E0C; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">900</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#3C2E0C</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#28200B" style="background: #28200B; height: 40px; border-radius: 4px; border: 1px solid #888;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">950</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#28200B</div>
+                        </div>
                     </div>
                 </div>
                 <div class="accent-card">
                     <h3>🌿 Pistachio</h3>
-                    <div class="accent-colors">
-                        <div class="accent-color" style="background: #869448;"></div>
-                        <div class="accent-color" style="background: #6B7A1A;"></div>
+                    <div class="color-grid" style="grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 0.5rem; margin-top: 0.5rem;">
+                        <div style="text-align: center;">
+                            <div data-hex="#F1F3D6" style="background: #F1F3D6; height: 40px; border-radius: 4px; border: 1px solid var(--ui);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">50</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#F1F3D6</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#E4E8BA" style="background: #E4E8BA; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">100</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#E4E8BA</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#D6DC9F" style="background: #D6DC9F; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">150</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#D6DC9F</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#C8D087" style="background: #C8D087; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">200</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#C8D087</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#AEBB5E" style="background: #AEBB5E; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">300</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#AEBB5E</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#869448" style="background: #869448; height: 40px; border-radius: 4px; border: 2px solid var(--tx);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem; font-weight: 700;">400</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#869448</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#778635" style="background: #778635; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">500</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#778635</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#6B7A1A" style="background: #6B7A1A; height: 40px; border-radius: 4px; border: 2px solid var(--tx);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem; font-weight: 700;">600</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#6B7A1A</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#5A6516" style="background: #5A6516; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">700</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#5A6516</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#424A11" style="background: #424A11; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">800</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#424A11</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#353B0F" style="background: #353B0F; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">850</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#353B0F</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#292C0D" style="background: #292C0D; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">900</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#292C0D</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#1C1E0B" style="background: #1C1E0B; height: 40px; border-radius: 4px; border: 1px solid #888;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">950</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#1C1E0B</div>
+                        </div>
                     </div>
                 </div>
                 <div class="accent-card">
                     <h3>🌿 Mint</h3>
-                    <div class="accent-colors">
-                        <div class="accent-color" style="background: #49A396;"></div>
-                        <div class="accent-color" style="background: #2D7A70;"></div>
+                    <div class="color-grid" style="grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 0.5rem; margin-top: 0.5rem;">
+                        <div style="text-align: center;">
+                            <div data-hex="#E0F5F0" style="background: #E0F5F0; height: 40px; border-radius: 4px; border: 1px solid var(--ui);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">50</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#E0F5F0</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#C5ECE5" style="background: #C5ECE5; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">100</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#C5ECE5</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#AAE2DA" style="background: #AAE2DA; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">150</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#AAE2DA</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#91D7CF" style="background: #91D7CF; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">200</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#91D7CF</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#66C2B6" style="background: #66C2B6; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">300</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#66C2B6</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#49A396" style="background: #49A396; height: 40px; border-radius: 4px; border: 2px solid var(--tx);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem; font-weight: 700;">400</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#49A396</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#3C9286" style="background: #3C9286; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">500</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#3C9286</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#2D7A70" style="background: #2D7A70; height: 40px; border-radius: 4px; border: 2px solid var(--tx);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem; font-weight: 700;">600</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#2D7A70</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#26665E" style="background: #26665E; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">700</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#26665E</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#1D4B46" style="background: #1D4B46; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">800</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#1D4B46</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#183D39" style="background: #183D39; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">850</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#183D39</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#142E2C" style="background: #142E2C; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">900</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#142E2C</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#101F1E" style="background: #101F1E; height: 40px; border-radius: 4px; border: 1px solid #888;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">950</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#101F1E</div>
+                        </div>
                     </div>
                 </div>
                 <div class="accent-card">
                     <h3>🫐 Blueberry</h3>
-                    <div class="accent-colors">
-                        <div class="accent-color" style="background: #5078B4;"></div>
-                        <div class="accent-color" style="background: #2B5A96;"></div>
+                    <div class="color-grid" style="grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 0.5rem; margin-top: 0.5rem;">
+                        <div style="text-align: center;">
+                            <div data-hex="#E5EEF8" style="background: #E5EEF8; height: 40px; border-radius: 4px; border: 1px solid var(--ui);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">50</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#E5EEF8</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#CFE1F2" style="background: #CFE1F2; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">100</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#CFE1F2</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#B9D4EB" style="background: #B9D4EB; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">150</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#B9D4EB</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#A4C6E4" style="background: #A4C6E4; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">200</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#A4C6E4</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#7EA8D1" style="background: #7EA8D1; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">300</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#7EA8D1</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#5078B4" style="background: #5078B4; height: 40px; border-radius: 4px; border: 2px solid var(--tx);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem; font-weight: 700;">400</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#5078B4</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#3F6AA4" style="background: #3F6AA4; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">500</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#3F6AA4</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#2B5A96" style="background: #2B5A96; height: 40px; border-radius: 4px; border: 2px solid var(--tx);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem; font-weight: 700;">600</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#2B5A96</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#244B7E" style="background: #244B7E; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">700</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#244B7E</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#1C375C" style="background: #1C375C; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">800</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#1C375C</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#172C4A" style="background: #172C4A; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">850</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#172C4A</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#132238" style="background: #132238; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">900</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#132238</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#0F1825" style="background: #0F1825; height: 40px; border-radius: 4px; border: 1px solid #888;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">950</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#0F1825</div>
+                        </div>
                     </div>
                 </div>
                 <div class="accent-card">
                     <h3>🟣 Plum</h3>
-                    <div class="accent-colors">
-                        <div class="accent-color" style="background: #8965BE;"></div>
-                        <div class="accent-color" style="background: #664195;"></div>
+                    <div class="color-grid" style="grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 0.5rem; margin-top: 0.5rem;">
+                        <div style="text-align: center;">
+                            <div data-hex="#F2ECF8" style="background: #F2ECF8; height: 40px; border-radius: 4px; border: 1px solid var(--ui);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">50</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#F2ECF8</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#E6DCF2" style="background: #E6DCF2; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">100</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#E6DCF2</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#D9CBEB" style="background: #D9CBEB; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">150</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#D9CBEB</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#CCB9E3" style="background: #CCB9E3; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">200</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#CCB9E3</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#B294D2" style="background: #B294D2; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">300</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#B294D2</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#8965BE" style="background: #8965BE; height: 40px; border-radius: 4px; border: 2px solid var(--tx);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem; font-weight: 700;">400</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#8965BE</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#7652AC" style="background: #7652AC; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">500</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#7652AC</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#664195" style="background: #664195; height: 40px; border-radius: 4px; border: 2px solid var(--tx);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem; font-weight: 700;">600</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#664195</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#56367D" style="background: #56367D; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">700</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#56367D</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#3F285C" style="background: #3F285C; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">800</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#3F285C</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#33214A" style="background: #33214A; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">850</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#33214A</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#271938" style="background: #271938; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">900</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#271938</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#1B1226" style="background: #1B1226; height: 40px; border-radius: 4px; border: 1px solid #888;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">950</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#1B1226</div>
+                        </div>
                     </div>
                 </div>
                 <div class="accent-card">
                     <h3>🍒 Cherry</h3>
-                    <div class="accent-colors">
-                        <div class="accent-color" style="background: #BF5A93;"></div>
-                        <div class="accent-color" style="background: #96336C;"></div>
+                    <div class="color-grid" style="grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 0.5rem; margin-top: 0.5rem;">
+                        <div style="text-align: center;">
+                            <div data-hex="#FFE7F0" style="background: #FFE7F0; height: 40px; border-radius: 4px; border: 1px solid var(--ui);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">50</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#FFE7F0</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#FFD3E5" style="background: #FFD3E5; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">100</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#FFD3E5</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#FFBFDA" style="background: #FFBFDA; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">150</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#FFBFDA</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#FFAACF" style="background: #FFAACF; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">200</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#FFAACF</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#F885B5" style="background: #F885B5; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">300</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#F885B5</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#BF5A93" style="background: #BF5A93; height: 40px; border-radius: 4px; border: 2px solid var(--tx);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem; font-weight: 700;">400</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#BF5A93</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#AD4880" style="background: #AD4880; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">500</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#AD4880</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#96336C" style="background: #96336C; height: 40px; border-radius: 4px; border: 2px solid var(--tx);"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem; font-weight: 700;">600</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#96336C</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#7D2B5A" style="background: #7D2B5A; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">700</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#7D2B5A</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#5C2042" style="background: #5C2042; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">800</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#5C2042</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#4A1A36" style="background: #4A1A36; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">850</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#4A1A36</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#38152A" style="background: #38152A; height: 40px; border-radius: 4px;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">900</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#38152A</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div data-hex="#26101D" style="background: #26101D; height: 40px; border-radius: 4px; border: 1px solid #888;"></div>
+                            <div style="font-size: 0.75rem; margin-top: 0.25rem;">950</div>
+                            <div style="font-size: 0.65rem; color: var(--tx-2); font-family: monospace;">#26101D</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -335,6 +915,59 @@
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             body.setAttribute('data-theme', newTheme);
         }
+
+        function copyToClipboard(hexCode, element) {
+            navigator.clipboard.writeText(hexCode).then(() => {
+                // Zeige visuelles Feedback
+                const originalBg = element.style.background;
+                element.style.background = 'var(--tx)';
+                element.style.transform = 'scale(0.95)';
+                
+                // Zeige Toast-Nachricht
+                showToast('Copied: ' + hexCode);
+                
+                // Zurücksetzen nach kurzer Zeit
+                setTimeout(() => {
+                    element.style.background = originalBg;
+                    element.style.transform = 'scale(1)';
+                }, 200);
+            }).catch(err => {
+                console.error('Copy failed:', err);
+            });
+        }
+
+        function showToast(message) {
+            // Entferne alten Toast falls vorhanden
+            const oldToast = document.querySelector('.toast');
+            if (oldToast) oldToast.remove();
+            
+            // Erstelle neuen Toast
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            // Zeige Toast
+            setTimeout(() => toast.classList.add('show'), 10);
+            
+            // Entferne Toast nach 2 Sekunden
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 2000);
+        }
+
+        // Event Delegation für alle Farbboxen
+        document.addEventListener('DOMContentLoaded', () => {
+            document.addEventListener('click', (e) => {
+                // Finde die Farbbox oder das Parent-Element
+                const colorBox = e.target.closest('[data-hex]');
+                if (colorBox) {
+                    const hexCode = colorBox.getAttribute('data-hex');
+                    copyToClipboard(hexCode, colorBox);
+                }
+            });
+        });
     </script>
 </body>
 </html>
