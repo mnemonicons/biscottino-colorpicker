@@ -19,4 +19,4 @@ MIT License - see [LICENSE](LICENSE) for details
 
 ## Credits
 
-Built 98% with [claude](https://claude.ai/) and 2% with 🍪
+Built 85% with [claude](https://claude.ai/) and 100% 🍪-influenced 
