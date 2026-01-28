@@ -14,6 +14,13 @@
         </svg>
         <span>GitHub</span>
     </a>
+    <button class="info-button" onclick="toggleInfo()">ℹ️</button>
+    <div class="info-popup" id="infoPopup">
+        For documentation, ports, and usage guidelines visit 
+        <a href="https://github.com/mnemonicons/biscottino" target="_blank" rel="noopener">
+            github.com/mnemonicons/biscottino
+        </a>
+    </div>
     <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
 
     <div class="container">
@@ -746,6 +753,20 @@
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             body.setAttribute('data-theme', newTheme);
         }
+
+        function toggleInfo() {
+            const popup = document.getElementById('infoPopup');
+            popup.classList.toggle('show');
+        }
+
+        // Schließe Popup wenn außerhalb geklickt wird
+        document.addEventListener('click', (e) => {
+            const popup = document.getElementById('infoPopup');
+            const infoButton = document.querySelector('.info-button');
+            if (popup && !popup.contains(e.target) && !infoButton.contains(e.target)) {
+                popup.classList.remove('show');
+            }
+        });
 
         function copyToClipboard(hexCode, element) {
             navigator.clipboard.writeText(hexCode).then(() => {

@@ -107,6 +107,61 @@
             fill: currentColor;
         }
 
+        .info-button {
+            position: fixed;
+            top: 1rem;
+            right: 6rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--ui-3);
+            border: 2px solid var(--ui-3);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--tx);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .info-button:hover {
+            background: var(--ui-2);
+            border-color: var(--ui-2);
+        }
+
+        .info-popup {
+            position: fixed;
+            top: 4.5rem;
+            right: 1rem;
+            background: var(--bg-2);
+            border: 2px solid var(--ui-2);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            max-width: 400px;
+            display: none;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--tx-2);
+        }
+
+        .info-popup.show {
+            display: block;
+        }
+
+        .info-popup a {
+            color: var(--tx);
+            text-decoration: none;
+            border-bottom: 1px solid var(--tx-3);
+            font-weight: 500;
+        }
+
+        .info-popup a:hover {
+            border-bottom-color: var(--tx);
+        }
+
         .theme-toggle {
             position: fixed;
             top: 1rem;
